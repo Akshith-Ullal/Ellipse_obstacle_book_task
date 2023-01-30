@@ -15,14 +15,18 @@ public struct PositionEntryinfo
 public class bookRecord : MonoBehaviour
 {
     public GameObject worldAnchor;
-    public GameObject grabObj;
+    //public GameObject grabObj;
     public GameObject grabObjgreen;
     public GameObject grabObjblue;
-    public GameObject endBox;
+   // public GameObject endBox;
     public GameObject endBoxblue;
     public GameObject endBoxgreen;
+    public bool startRecordinggreen = false;
+    public bool startRecordingblue = false;
     public bool isRecordinggreen = false;
     public bool isRecordingblue = false;
+    public bool endRecordinggreen = false;
+    public bool endRecordingblue = false;
     private double startTime;
     private Vector3 startPos;
     private Quaternion startRot;
@@ -31,12 +35,20 @@ public class bookRecord : MonoBehaviour
     public float endDisgreen;
     public float startDisblue;
     public float endDisblue;
+    public bool trialdone;
+    public bool bluetrialdone;
+    public bool greentrialdone;
+    public float distancelimit;
+  
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        trialdone = false;
+        bluetrialdone = false;
+        greentrialdone = false;
+        distancelimit = 2.0f;
     }
 
     // Update is called once per frame
@@ -44,32 +56,50 @@ public class bookRecord : MonoBehaviour
     {
 
 
-        startDisgreen = Vector3.Distance(grabObjgreen.transform.position, endBoxgreen.transform.position);
-        endDisgreen = Vector3.Distance(grabObjgreen.transform.position, endBoxblue.transform.position);
-        startDisblue = Vector3.Distance(grabObjblue.transform.position, endBoxblue.transform.position);
-        endDisblue = Vector3.Distance(grabObjblue.transform.position, endBoxgreen.transform.position);
+        startDisgreen = Vector3.Distance(grabObjgreen.transform.position, endBoxblue.transform.position);
+        endDisgreen = Vector3.Distance(grabObjgreen.transform.position, endBoxgreen.transform.position);
+        startDisblue = Vector3.Distance(grabObjblue.transform.position, endBoxgreen.transform.position);
+        endDisblue = Vector3.Distance(grabObjblue.transform.position, endBoxblue.transform.position);
 
-        if(startDisgreen >= 0.2)
+        if(startDisgreen >= distancelimit && !isRecordinggreen)
         {
+            startRecordinggreen = true;
+            
+        }
+        if (startRecordinggreen)
+        {
+            StartRecordinggreen();
+            Debug.Log("Start Recording green book");
+            startRecordinggreen = false;
             isRecordinggreen = true;
-            StartRecording();
         }
 
-        if (startDisgreen >= 0.2)
+        if (startDisblue >= distancelimit && !isRecordingblue)
         {
-            isRecordinggreen = true;
-            StartRecording();
+            startRecordingblue = true;
+            
+        }
+        if (startRecordingblue)
+        {
+            StartRecordingblue();
+            Debug.Log("Start Recording blue book");
+            startRecordingblue = false;
+            isRecordingblue = true;
         }
 
-        if(endDisgreen <= 0.2)
+        if (endDisgreen <= distancelimit && !endRecordinggreen)
         {
             StopAndSaveRecording();
+            endRecordinggreen = true;
             isRecordinggreen = false;
+            greentrialdone = true;
         }
-        if (endDisblue <= 0.2)
+        if (endDisblue <= distancelimit && !endRecordingblue)
         {
             StopAndSaveRecording();
+            endRecordingblue = true;
             isRecordingblue = false;
+            bluetrialdone = true;
         }
 
         if (isRecordinggreen || isRecordingblue)
@@ -89,19 +119,22 @@ public class bookRecord : MonoBehaviour
 
         }
 
+        if(greentrialdone && bluetrialdone)
+        {
+            Debug.Log("Both trials done");
+        }
+
     }
 
-    public void StartRecording()
+    public void StartRecordinggreen()
     {
 
-        if (isRecordinggreen)
-        {
-            Debug.Log("Start Recording green book");
-        }
-        if (isRecordingblue)
-        {
-            Debug.Log("Start Recording blue book");
-        }
+        
+       
+            startTime = Time.time;
+            startPos = worldAnchor.transform.position;
+            startRot = worldAnchor.transform.rotation;
+             
         
 
         //The commented lines were in the original code
@@ -118,12 +151,19 @@ public class bookRecord : MonoBehaviour
         //    startRot = worldAnchor.transform.rotation;
         //}
 
+           
+    }
+    public void StartRecordingblue()
+    {
+        
             startTime = Time.time;
             startPos = worldAnchor.transform.position;
             startRot = worldAnchor.transform.rotation;
+        
     }
 
-    public void StopAndSaveRecording()
+
+        public void StopAndSaveRecording()
     {
 
 
@@ -133,13 +173,15 @@ public class bookRecord : MonoBehaviour
         //save to file
         if (isRecordinggreen) {
              filename = "PositionRecording_green_book" + this.name + "_";
+            Debug.Log("Green book position recorded");
         }
         if (isRecordingblue)
         {
              filename = "PositionRecording_blue_book" + this.name + "_";
+            Debug.Log("Blue book position recorded");
         }
         //string path = Application.persistentDataPath + "/pathOfDevice";
-        string path = @"C:\Users\liuj58\MRTK\Assets\savedData";
+        string path = @"C:\Users\ullala\Documents\GitHub\Ellipse_obstacle_book_task\Assets\savedData";
 
         Directory.CreateDirectory(path);
 

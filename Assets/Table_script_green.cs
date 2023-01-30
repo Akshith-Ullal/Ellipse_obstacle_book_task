@@ -14,10 +14,18 @@ public class Table_script_green : MonoBehaviour
     public float zorigin;
     public float x;
     public float z;
+    public GameObject grabObjgreen;
+    public GameObject grabObjblue;
+    public GameObject endBoxblue;
+    public GameObject endBoxgreen;
     public float next_angle = 180.0f;
     public float next_angle_blue = 0.0f;
     public bool green_angle_flag = false;
     System.Random rnd = new System.Random();
+    public Vector3 bluebookinitrelpos; // used to store the initial relative position of the blue book to the table
+    public Vector3 greenbookinitrelpos; // used to store the initial relative position of the green book to the table
+    public Vector3 blueboxinitrelpos; // used to store the initial relative position of the blue box to the table
+    public Vector3 greenboxinitrelpos; // used to store the initial relative position of the green box to the table
 
     void Start()
     {
@@ -25,9 +33,12 @@ public class Table_script_green : MonoBehaviour
         xorigin = 0.0f;
         zorigin = 0.0f;
 
-        
-        
-        
+
+        //bluebookinitrelpos = grabObjblue.transform.localPosition;
+        //greenbookinitrelpos = grabObjgreen.transform.localPosition;
+        //blueboxinitrelpos = endBoxblue.transform.localPosition;
+        //greenboxinitrelpos = endBoxgreen.transform.localPosition;
+
 
 
 
@@ -39,6 +50,9 @@ public class Table_script_green : MonoBehaviour
             x = xorigin + Mathf.Sin(next_angle * Mathf.Deg2Rad) * radius;
             z = zorigin + Mathf.Cos(next_angle * Mathf.Deg2Rad) * radius;
 
+             grabObjgreen.transform.localPosition = greenbookinitrelpos;
+             endBoxgreen.transform.localPosition = greenboxinitrelpos;
+
             this.gameObject.transform.position = new Vector3(x, 0.0f, z);
             this.gameObject.transform.rotation = Quaternion.Euler(0, next_angle, 0);
         }
@@ -48,6 +62,9 @@ public class Table_script_green : MonoBehaviour
             Debug.Log("Start angle blue :" + next_angle_blue);
             x = xorigin + Mathf.Sin(next_angle_blue * Mathf.Deg2Rad) * radius;
             z = zorigin + Mathf.Cos(next_angle_blue * Mathf.Deg2Rad) * radius;
+
+            grabObjblue.transform.localPosition = bluebookinitrelpos;
+            endBoxblue.transform.localPosition = blueboxinitrelpos;
 
             this.gameObject.transform.position = new Vector3(x, 0.0f, z);
             this.gameObject.transform.rotation = Quaternion.Euler(0, next_angle_blue, 0);
@@ -59,7 +76,7 @@ public class Table_script_green : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             
             
@@ -77,6 +94,10 @@ public class Table_script_green : MonoBehaviour
                 x = xorigin + Mathf.Sin(next_angle * Mathf.Deg2Rad) * radius;
                 z = zorigin + Mathf.Cos(next_angle * Mathf.Deg2Rad) * radius;
 
+                //grabObjgreen.transform.localPosition = greenbookinitrelpos;
+                //endBoxgreen.transform.localPosition = greenboxinitrelpos;
+
+
                 this.gameObject.transform.position = new Vector3(x, 0.0f, z);
                 this.gameObject.transform.rotation = Quaternion.Euler(0, next_angle, 0);
             }
@@ -87,6 +108,9 @@ public class Table_script_green : MonoBehaviour
 
                 x = xorigin + Mathf.Sin(next_angle_blue * Mathf.Deg2Rad) * radius;
                 z = zorigin + Mathf.Cos(next_angle_blue * Mathf.Deg2Rad) * radius;
+
+                //grabObjblue.transform.localPosition = bluebookinitrelpos;
+                //endBoxblue.transform.localPosition = blueboxinitrelpos;
 
                 this.gameObject.transform.position = new Vector3(x, 0.0f, z);
                 this.gameObject.transform.rotation = Quaternion.Euler(0, next_angle_blue, 0);
