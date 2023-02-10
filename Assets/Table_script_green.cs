@@ -34,10 +34,10 @@ public class Table_script_green : MonoBehaviour
         zorigin = 0.0f;
 
 
-        //bluebookinitrelpos = grabObjblue.transform.localPosition;
-        //greenbookinitrelpos = grabObjgreen.transform.localPosition;
-        //blueboxinitrelpos = endBoxblue.transform.localPosition;
-        //greenboxinitrelpos = endBoxgreen.transform.localPosition;
+        bluebookinitrelpos = grabObjblue.transform.localPosition;
+        greenbookinitrelpos = grabObjgreen.transform.localPosition;
+        blueboxinitrelpos = endBoxblue.transform.localPosition;
+        greenboxinitrelpos = endBoxgreen.transform.localPosition;
 
 
 
@@ -94,8 +94,8 @@ public class Table_script_green : MonoBehaviour
                 x = xorigin + Mathf.Sin(next_angle * Mathf.Deg2Rad) * radius;
                 z = zorigin + Mathf.Cos(next_angle * Mathf.Deg2Rad) * radius;
 
-                //grabObjgreen.transform.localPosition = greenbookinitrelpos;
-                //endBoxgreen.transform.localPosition = greenboxinitrelpos;
+                grabObjgreen.transform.localPosition = greenbookinitrelpos;
+                endBoxgreen.transform.localPosition = greenboxinitrelpos;
 
 
                 this.gameObject.transform.position = new Vector3(x, 0.0f, z);
@@ -109,8 +109,8 @@ public class Table_script_green : MonoBehaviour
                 x = xorigin + Mathf.Sin(next_angle_blue * Mathf.Deg2Rad) * radius;
                 z = zorigin + Mathf.Cos(next_angle_blue * Mathf.Deg2Rad) * radius;
 
-                //grabObjblue.transform.localPosition = bluebookinitrelpos;
-                //endBoxblue.transform.localPosition = blueboxinitrelpos;
+                grabObjblue.transform.localPosition = bluebookinitrelpos;
+                endBoxblue.transform.localPosition = blueboxinitrelpos;
 
                 this.gameObject.transform.position = new Vector3(x, 0.0f, z);
                 this.gameObject.transform.rotation = Quaternion.Euler(0, next_angle_blue, 0);

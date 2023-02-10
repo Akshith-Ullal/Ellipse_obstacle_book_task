@@ -340,34 +340,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &196727229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196727227}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 811cb5559dcb4064495dc83ee9d9f1b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0
-  xorigin: 0
-  zorigin: 0
-  x: 0
-  z: 0
-  grabObjgreen: {fileID: 336348644}
-  grabObjblue: {fileID: 1880965010}
-  endBoxblue: {fileID: 1990220281}
-  endBoxgreen: {fileID: 1313533543}
-  next_angle: 180
-  next_angle_blue: 0
-  green_angle_flag: 0
-  bluebookinitrelpos: {x: 0, y: 0, z: 0}
-  greenbookinitrelpos: {x: 0, y: 0, z: 0}
-  blueboxinitrelpos: {x: 0, y: 0, z: 0}
-  greenboxinitrelpos: {x: 0, y: 0, z: 0}
 --- !u!4 &196727232 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 08d5439121a07f544bdaaa816bb04c47, type: 3}
@@ -1990,20 +1962,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldAnchor: {fileID: 718341540}
+  greentable: {fileID: 196727227}
+  bluetable: {fileID: 2098217864}
   grabObjgreen: {fileID: 336348644}
   grabObjblue: {fileID: 1880965010}
   endBoxblue: {fileID: 1990220281}
   endBoxgreen: {fileID: 1313533543}
+  startRecordinggreen: 0
+  startRecordingblue: 0
   isRecordinggreen: 0
   isRecordingblue: 0
+  endRecordinggreen: 0
+  endRecordingblue: 0
   startDisgreen: 0
   endDisgreen: 0
   startDisblue: 0
   endDisblue: 0
   trialdone: 0
+  trialnum: 0
+  triallimit: 0
   bluetrialdone: 0
   greentrialdone: 0
   distancelimit: 0
+  radius: 0
+  xorigin: 0
+  zorigin: 0
+  x: 0
+  z: 0
+  next_angle: 180
+  next_angle_blue: 0
+  green_angle_flag: 0
+  bluebookinitrelpos: {x: 0, y: 0, z: 0}
+  greenbookinitrelpos: {x: 0, y: 0, z: 0}
+  blueboxinitrelpos: {x: 0, y: 0, z: 0}
+  greenboxinitrelpos: {x: 0, y: 0, z: 0}
+  bluebookinitrelrot: {x: 0, y: 0, z: 0, w: 0}
+  greenbookinitrelrot: {x: 0, y: 0, z: 0, w: 0}
+  blueboxinitrelrot: {x: 0, y: 0, z: 0, w: 0}
+  greenboxinitrelrot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &1071126762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2644,15 +2640,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cba00f75539bc564fabb9136fccfac6c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.86
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cba00f75539bc564fabb9136fccfac6c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.33
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cba00f75539bc564fabb9136fccfac6c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.48
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cba00f75539bc564fabb9136fccfac6c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2962,34 +2958,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce1c2951c87a344c94739ad82cfb5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2098217867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2098217864}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 811cb5559dcb4064495dc83ee9d9f1b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0
-  xorigin: 0
-  zorigin: 0
-  x: 0
-  z: 0
-  grabObjgreen: {fileID: 336348644}
-  grabObjblue: {fileID: 1880965010}
-  endBoxblue: {fileID: 1990220281}
-  endBoxgreen: {fileID: 1313533543}
-  next_angle: 180
-  next_angle_blue: 0
-  green_angle_flag: 0
-  bluebookinitrelpos: {x: 0, y: 0, z: 0}
-  greenbookinitrelpos: {x: 0, y: 0, z: 0}
-  blueboxinitrelpos: {x: 0, y: 0, z: 0}
-  greenboxinitrelpos: {x: 0, y: 0, z: 0}
 --- !u!4 &2098217868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 08d5439121a07f544bdaaa816bb04c47, type: 3}
