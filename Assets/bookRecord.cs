@@ -94,7 +94,7 @@ public class bookRecord : MonoBehaviour
         trialnum = 0;
         triallimit = 3;
 
-        radius = 10.0f;
+        //radius = 15.0f;
         xorigin = 0.0f;
         zorigin = 0.0f;
 
@@ -114,12 +114,21 @@ public class bookRecord : MonoBehaviour
         endbluepos = endblue.transform.localPosition;
 
 
-        greentable.transform.transform.LookAt(worldAnchor.transform.position);
-        bluetable.transform.transform.LookAt(worldAnchor.transform.position);
+        xgreen = xorigin + Mathf.Sin(next_angle * Mathf.Deg2Rad) * radius;
+        zgreen = zorigin + Mathf.Cos(next_angle * Mathf.Deg2Rad) * radius;
+        greentable.transform.position = new Vector3(xgreen, 0.0f, zgreen);
+        greentable.transform.LookAt(worldAnchor.transform.position);
 
 
-        //startblue.SetActive(false);
-        //endblue.SetActive(false);
+        xblue = xorigin + Mathf.Sin(next_angle_blue * Mathf.Deg2Rad) * radius;
+        zblue = zorigin + Mathf.Cos(next_angle_blue * Mathf.Deg2Rad) * radius;
+        bluetable.transform.position = new Vector3(xblue, 0.0f, zblue);
+        bluetable.transform.LookAt(worldAnchor.transform.position);
+
+
+
+        startblue.SetActive(false);
+        endblue.SetActive(false);
 
     }
 
@@ -201,11 +210,11 @@ public class bookRecord : MonoBehaviour
             isRecordinggreen = false;
             greentrialdone = true;
 
-            //startblue.SetActive(true);
-            //endblue.SetActive(true);
+            startblue.SetActive(true);
+            endblue.SetActive(true);
 
-            //startgreen.SetActive(false);
-            //endgreen.SetActive(false);
+            startgreen.SetActive(false);
+            endgreen.SetActive(false);
 
         }
         //if (endDisblue <= distancelimit && !endRecordingblue)
@@ -256,10 +265,10 @@ public class bookRecord : MonoBehaviour
 
 
 
-            //startblue.SetActive(true);
-            //endblue.SetActive(true);
-            //startgreen.SetActive(true);
-            //endgreen.SetActive(true);
+            startblue.SetActive(true);
+            endblue.SetActive(true);
+            startgreen.SetActive(true);
+            endgreen.SetActive(true);
 
 
 
@@ -272,8 +281,8 @@ public class bookRecord : MonoBehaviour
 
 
            
-                xgreen = xorigin + Mathf.Sin(next_angle * Mathf.Deg2Rad) * radius;
-                zgreen = zorigin + Mathf.Cos(next_angle * Mathf.Deg2Rad) * radius;
+            xgreen = xorigin + Mathf.Sin(next_angle * Mathf.Deg2Rad) * radius;
+            zgreen = zorigin + Mathf.Cos(next_angle * Mathf.Deg2Rad) * radius;
 
 
 
@@ -281,21 +290,14 @@ public class bookRecord : MonoBehaviour
             
 
             greentable.transform.position = new Vector3(xgreen, 0.0f, zgreen);
-            greentable.transform.transform.LookAt(worldAnchor.transform.position);
+            greentable.transform.LookAt(worldAnchor.transform.position);
 
-            //if (next_angle < 180)
-            //{
-            //    greentable.transform.rotation = Quaternion.Euler(0, next_angle+180, 0);
-            //}
-            //else
-            //{
-            //    greentable.transform.rotation = Quaternion.Euler(0, next_angle, 0);
-            //}
+           
 
-            //grabObjgreen.transform.localPosition = greenbookinitrelpos;
-            //grabObjgreen.transform.localRotation = greenbookinitrelrot;
-            //endBoxgreen.transform.localPosition = greenboxinitrelpos;
-            //endBoxgreen.transform.localRotation = greenboxinitrelrot;
+            grabObjgreen.transform.localPosition = greenbookinitrelpos;
+            grabObjgreen.transform.localRotation = greenbookinitrelrot;
+            endBoxgreen.transform.localPosition = greenboxinitrelpos;
+            endBoxgreen.transform.localRotation = greenboxinitrelrot;
 
             //startgreen.transform.localPosition = startgreenpos;
             //endgreen.transform.localPosition = endgreenpos;
@@ -310,7 +312,7 @@ public class bookRecord : MonoBehaviour
            
 
             xblue = xorigin + Mathf.Sin(next_angle_blue * Mathf.Deg2Rad) * radius;
-                zblue = zorigin + Mathf.Cos(next_angle_blue * Mathf.Deg2Rad) * radius;
+            zblue = zorigin + Mathf.Cos(next_angle_blue * Mathf.Deg2Rad) * radius;
 
 
 
@@ -318,21 +320,15 @@ public class bookRecord : MonoBehaviour
            
 
             bluetable.transform.position = new Vector3(xblue, 0.0f, zblue);
-            bluetable.transform.transform.LookAt(worldAnchor.transform.position);
-            //if (next_angle_blue < 180)
-            //{
-            //    bluetable.transform.rotation = Quaternion.Euler(0, next_angle_blue+180.0f, 0);
-            //}
-            //else {
-            //    bluetable.transform.rotation = Quaternion.Euler(0, next_angle_blue, 0);
-            //}
+            bluetable.transform.LookAt(worldAnchor.transform.position);
+           
 
 
 
-            //grabObjblue.transform.localPosition = bluebookinitrelpos;
-            //grabObjblue.transform.localRotation = bluebookinitrelrot;
-            //endBoxblue.transform.localPosition = blueboxinitrelpos;
-            //endBoxblue.transform.localRotation = blueboxinitrelrot;
+            grabObjblue.transform.localPosition = bluebookinitrelpos;
+            grabObjblue.transform.localRotation = bluebookinitrelrot;
+            endBoxblue.transform.localPosition = blueboxinitrelpos;
+            endBoxblue.transform.localRotation = blueboxinitrelrot;
 
 
             //startblue.transform.localPosition = startbluepos;
@@ -341,8 +337,8 @@ public class bookRecord : MonoBehaviour
 
 
 
-            //startblue.SetActive(false);
-            //endblue.SetActive(false);
+            startblue.SetActive(false);
+            endblue.SetActive(false);
 
             trialdone = false;
             endRecordinggreen = false;
@@ -353,6 +349,11 @@ public class bookRecord : MonoBehaviour
         if(trialnum >= triallimit)
         {
             Debug.Log("All trials done");
+            // when all trials done deactivate all the objects
+            startblue.SetActive(false);
+            endblue.SetActive(false);
+            startgreen.SetActive(false);
+            endgreen.SetActive(false);
         }
 
     }
