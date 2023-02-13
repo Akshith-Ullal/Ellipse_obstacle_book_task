@@ -23,6 +23,10 @@ public class bookRecord : MonoBehaviour
    // public GameObject endBox;
     public GameObject endBoxblue;
     public GameObject endBoxgreen;
+    public GameObject startgreen;
+    public GameObject endgreen;
+    public GameObject startblue;
+    public GameObject endblue;
     public bool startRecordinggreen = false;
     public bool startRecordingblue = false;
     public bool isRecordinggreen = false;
@@ -56,8 +60,10 @@ public class bookRecord : MonoBehaviour
     public float radius;
     public float xorigin;
     public float zorigin;
-    public float x;
-    public float z;
+    public float xgreen;
+    public float zgreen;
+    public float xblue;
+    public float zblue;
     public float next_angle = 180.0f;
     public float next_angle_blue = 0.0f;
     public bool green_angle_flag = false;
@@ -66,6 +72,10 @@ public class bookRecord : MonoBehaviour
     public Vector3 greenbookinitrelpos; // used to store the initial relative position of the green book to the table
     public Vector3 blueboxinitrelpos; // used to store the initial relative position of the blue box to the table
     public Vector3 greenboxinitrelpos; // used to store the initial relative position of the green box to the table
+    public Vector3 startgreenpos;
+    public Vector3 endgreenpos;
+    public Vector3 startbluepos;
+    public Vector3 endbluepos;
     public Quaternion bluebookinitrelrot; // used to store the initial relative rotation of the blue book to the table
     public Quaternion greenbookinitrelrot; // used to store the initial relative rotation of the green book to the table
     public Quaternion blueboxinitrelrot; // used to store the initial relative rotation of the blue box to the table
@@ -82,7 +92,7 @@ public class bookRecord : MonoBehaviour
         greentrialdone = false;
         distancelimit = 2.0f;
         trialnum = 0;
-        triallimit = 5;
+        triallimit = 3;
 
         radius = 10.0f;
         xorigin = 0.0f;
@@ -97,6 +107,19 @@ public class bookRecord : MonoBehaviour
         greenbookinitrelrot = grabObjgreen.transform.localRotation;
         blueboxinitrelrot = endBoxblue.transform.localRotation;
         greenboxinitrelrot = endBoxgreen.transform.localRotation;
+
+        startgreenpos = startgreen.transform.localPosition;
+        endgreenpos = endgreen.transform.localPosition;
+        startbluepos = startblue.transform.localPosition;
+        endbluepos = endblue.transform.localPosition;
+
+
+        greentable.transform.transform.LookAt(worldAnchor.transform.position);
+        bluetable.transform.transform.LookAt(worldAnchor.transform.position);
+
+
+        //startblue.SetActive(false);
+        //endblue.SetActive(false);
 
     }
 
@@ -127,18 +150,24 @@ public class bookRecord : MonoBehaviour
 
             // These lines are to manually return the box and the books to their original relative positions
             grabObjgreen.transform.localPosition = greenbookinitrelpos;
-            endBoxgreen.transform.localPosition = greenboxinitrelpos;
             grabObjgreen.transform.localRotation = greenbookinitrelrot;
+            endBoxgreen.transform.localPosition = greenboxinitrelpos;
             endBoxgreen.transform.localRotation = greenboxinitrelrot;
 
-            grabObjblue.transform.localPosition = bluebookinitrelpos;
-            endBoxblue.transform.localPosition = blueboxinitrelpos;
+            grabObjblue.transform.localPosition = bluebookinitrelpos; 
             grabObjblue.transform.localRotation = bluebookinitrelrot;
+            endBoxblue.transform.localPosition = blueboxinitrelpos;
             endBoxblue.transform.localRotation = blueboxinitrelrot;
 
+            startblue.transform.localPosition = startbluepos;
+            endblue.transform.localPosition = endbluepos;
+
+            startgreen.transform.localPosition = startgreenpos;
+            endgreen.transform.localPosition = endgreenpos;
         }
 
-            if (startDisgreen >= distancelimit && !isRecordinggreen)
+        //if (startDisgreen >= distancelimit && !isRecordinggreen)
+        if (startgreen.GetComponent<Collider>().bounds.Contains(transform.position) && !isRecordinggreen)
         {
             startRecordinggreen = true;
             
@@ -151,7 +180,8 @@ public class bookRecord : MonoBehaviour
             isRecordinggreen = true;
         }
 
-        if (startDisblue >= distancelimit && !isRecordingblue)
+        //if (startDisblue >= distancelimit && !isRecordingblue)
+        if (startblue.GetComponent<Collider>().bounds.Contains(transform.position) && !isRecordingblue)
         {
             startRecordingblue = true;
             
@@ -163,16 +193,24 @@ public class bookRecord : MonoBehaviour
             startRecordingblue = false;
             isRecordingblue = true;
         }
-
-        if (endDisgreen <= distancelimit && !endRecordinggreen)
+        //if (endDisgreen <= distancelimit && !isRecordinggreen)
+        if (endgreen.GetComponent<Collider>().bounds.Contains(transform.position) && !endRecordinggreen)
         {
             StopAndSaveRecording();
             endRecordinggreen = true;
             isRecordinggreen = false;
             greentrialdone = true;
+
+            //startblue.SetActive(true);
+            //endblue.SetActive(true);
+
+            //startgreen.SetActive(false);
+            //endgreen.SetActive(false);
+
         }
-        if (endDisblue <= distancelimit && !endRecordingblue)
-        {
+        //if (endDisblue <= distancelimit && !endRecordingblue)
+            if (endblue.GetComponent<Collider>().bounds.Contains(transform.position) && !endRecordingblue)
+            {
             StopAndSaveRecording();
             endRecordingblue = true;
             isRecordingblue = false;
@@ -185,18 +223,9 @@ public class bookRecord : MonoBehaviour
             PositionEntryinfo entry;
             //offset from start position
             // when using the hololens
-            //entry.position = this.gameObject.transform.position - startPos;
+            entry.position = this.gameObject.transform.position - startPos;
 
-            //for mouse movement simulation
-            if (isRecordinggreen)
-            {
-                entry.position = grabObjgreen.transform.position - startPos;
-
-            }
-            else
-            {
-                entry.position = grabObjblue.transform.position - startPos;
-            }
+            
 
             //quaternion diff such that startRot * diff = gameObject.transform.rotation
             entry.rotation = QuatDiff(startRot, this.gameObject.transform.rotation);
@@ -224,60 +253,101 @@ public class bookRecord : MonoBehaviour
             Debug.Log("Both trials done");
             trialnum++;
 
-           
+
+
+
+            //startblue.SetActive(true);
+            //endblue.SetActive(true);
+            //startgreen.SetActive(true);
+            //endgreen.SetActive(true);
+
+
+
+
+
+
             // shifting the tables to random angles after each trial is done
             next_angle = rnd.Next(0, 360);
                 Debug.Log("Next angle green :" + next_angle);
 
-                x = xorigin + Mathf.Sin(next_angle * Mathf.Deg2Rad) * radius;
-                z = zorigin + Mathf.Cos(next_angle * Mathf.Deg2Rad) * radius;
 
-
-           while (grabObjgreen.transform.localPosition != greenbookinitrelpos || grabObjgreen.transform.localRotation != greenbookinitrelrot)
-            {
-                grabObjgreen.transform.localPosition = greenbookinitrelpos;
-                grabObjgreen.transform.localRotation = greenbookinitrelrot;
-                Debug.Log("In green book loop");
-            }
-
-            
-            endBoxgreen.transform.localPosition = greenboxinitrelpos;
-            endBoxgreen.transform.localRotation = greenboxinitrelrot;
-
-            //greentable.transform.position = new Vector3(x, 0.0f, z);
-                //greentable.transform.rotation = Quaternion.Euler(0, next_angle, 0);
-
-               
-
-            
-
-                next_angle_blue = next_angle_method(next_angle);
-                Debug.Log("Next angle blue :" + next_angle_blue);
-
-                x = xorigin + Mathf.Sin(next_angle_blue * Mathf.Deg2Rad) * radius;
-                z = zorigin + Mathf.Cos(next_angle_blue * Mathf.Deg2Rad) * radius;
-
-
-            while (grabObjblue.transform.localPosition != bluebookinitrelpos || grabObjblue.transform.localRotation != bluebookinitrelrot)
-            {
-                grabObjblue.transform.localPosition = bluebookinitrelpos;
-                grabObjblue.transform.localRotation = bluebookinitrelrot;
-                Debug.Log("In blue book loop");
-            }
-            
            
-            endBoxblue.transform.localPosition = blueboxinitrelpos; 
-            endBoxblue.transform.localRotation = blueboxinitrelrot;
-
-            //bluetable.transform.position = new Vector3(x, 0.0f, z);
-                //bluetable.transform.rotation = Quaternion.Euler(0, next_angle_blue, 0);
-
-                
+                xgreen = xorigin + Mathf.Sin(next_angle * Mathf.Deg2Rad) * radius;
+                zgreen = zorigin + Mathf.Cos(next_angle * Mathf.Deg2Rad) * radius;
 
 
+
+
+            
+
+            greentable.transform.position = new Vector3(xgreen, 0.0f, zgreen);
+            greentable.transform.transform.LookAt(worldAnchor.transform.position);
+
+            //if (next_angle < 180)
+            //{
+            //    greentable.transform.rotation = Quaternion.Euler(0, next_angle+180, 0);
+            //}
+            //else
+            //{
+            //    greentable.transform.rotation = Quaternion.Euler(0, next_angle, 0);
+            //}
+
+            //grabObjgreen.transform.localPosition = greenbookinitrelpos;
+            //grabObjgreen.transform.localRotation = greenbookinitrelrot;
+            //endBoxgreen.transform.localPosition = greenboxinitrelpos;
+            //endBoxgreen.transform.localRotation = greenboxinitrelrot;
+
+            //startgreen.transform.localPosition = startgreenpos;
+            //endgreen.transform.localPosition = endgreenpos;
+
+
+
+            //next_angle_blue = next_angle_method(next_angle);
+            next_angle_blue = next_angle+ rnd.Next(90, 270);
+            next_angle_blue = next_angle_blue % 360.0f;
+            Debug.Log("Next angle blue :" + next_angle_blue);
+
+           
+
+            xblue = xorigin + Mathf.Sin(next_angle_blue * Mathf.Deg2Rad) * radius;
+                zblue = zorigin + Mathf.Cos(next_angle_blue * Mathf.Deg2Rad) * radius;
+
+
+
+
+           
+
+            bluetable.transform.position = new Vector3(xblue, 0.0f, zblue);
+            bluetable.transform.transform.LookAt(worldAnchor.transform.position);
+            //if (next_angle_blue < 180)
+            //{
+            //    bluetable.transform.rotation = Quaternion.Euler(0, next_angle_blue+180.0f, 0);
+            //}
+            //else {
+            //    bluetable.transform.rotation = Quaternion.Euler(0, next_angle_blue, 0);
+            //}
+
+
+
+            //grabObjblue.transform.localPosition = bluebookinitrelpos;
+            //grabObjblue.transform.localRotation = bluebookinitrelrot;
+            //endBoxblue.transform.localPosition = blueboxinitrelpos;
+            //endBoxblue.transform.localRotation = blueboxinitrelrot;
+
+
+            //startblue.transform.localPosition = startbluepos;
+            //endblue.transform.localPosition = endbluepos;
+
+
+
+
+            //startblue.SetActive(false);
+            //endblue.SetActive(false);
 
             trialdone = false;
-            Debug.Log("Trial loop done");
+            endRecordinggreen = false;
+            endRecordingblue = false;
+          
         }
 
         if(trialnum >= triallimit)
@@ -333,12 +403,12 @@ public class bookRecord : MonoBehaviour
         string filename = "";
         //save to file
         if (isRecordinggreen) {
-             filename = "PositionRecording_green_book_trial_num_"+trialnum.ToString() + this.name + "_";
+             filename = "PositionRecording_green_book_trial_num_"+(trialnum+1).ToString() +"_table_angle_"+next_angle.ToString()  + "_";
             Debug.Log("Green book position recorded");
         }
         if (isRecordingblue)
         {
-             filename = "PositionRecording_blue_book_trial_num_" + trialnum.ToString() + this.name + "_";
+             filename = "PositionRecording_blue_book_trial_num_" + (trialnum + 1).ToString()+"_table_angle_" + next_angle_blue.ToString() + "_";
             Debug.Log("Blue book position recorded");
         }
         //string path = Application.persistentDataPath + "/pathOfDevice";
