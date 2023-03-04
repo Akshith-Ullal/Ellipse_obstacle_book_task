@@ -64,7 +64,7 @@ public class bookRecord : MonoBehaviour
     public float zgreen;
     public float xblue;
     public float zblue;
-    public float next_angle = 180.0f;
+    public float next_angle = 135.0f;
     public float next_angle_blue = 0.0f;
     public bool green_angle_flag = false;
     System.Random rnd = new System.Random();
@@ -92,9 +92,11 @@ public class bookRecord : MonoBehaviour
         greentrialdone = false;
         distancelimit = 2.0f;
         trialnum = 0;
-        triallimit = 3;
+        triallimit = 10;
+        next_angle = 135.0f;
+        next_angle_blue = 0.0f;
 
-        //radius = 15.0f;
+        radius = 7.0f;
         xorigin = 0.0f;
         zorigin = 0.0f;
 
@@ -404,12 +406,12 @@ public class bookRecord : MonoBehaviour
         string filename = "";
         //save to file
         if (isRecordinggreen) {
-             filename = "PositionRecording_green_book_trial_num_"+(trialnum+1).ToString() +"_table_angle_"+next_angle.ToString()  + "_";
+             filename = "PositionRecording_green_book_trial_num_"+(trialnum+1).ToString() +"_table_angle_"+next_angle.ToString()  + "_radius_"+radius;
             Debug.Log("Green book position recorded");
         }
         if (isRecordingblue)
         {
-             filename = "PositionRecording_blue_book_trial_num_" + (trialnum + 1).ToString()+"_table_angle_" + next_angle_blue.ToString() + "_";
+             filename = "PositionRecording_blue_book_trial_num_" + (trialnum + 1).ToString()+"_table_angle_" + next_angle_blue.ToString() + "_radius_" + radius;
             Debug.Log("Blue book position recorded");
         }
         //string path = Application.persistentDataPath + "/pathOfDevice";
