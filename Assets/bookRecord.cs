@@ -96,7 +96,7 @@ public class bookRecord : MonoBehaviour
         next_angle = 135.0f;
         next_angle_blue = 0.0f;
 
-        radius = 7.0f;
+        radius = 5.0f;
         xorigin = 0.0f;
         zorigin = 0.0f;
 
@@ -118,14 +118,15 @@ public class bookRecord : MonoBehaviour
 
         xgreen = xorigin + Mathf.Sin(next_angle * Mathf.Deg2Rad) * radius;
         zgreen = zorigin + Mathf.Cos(next_angle * Mathf.Deg2Rad) * radius;
-        greentable.transform.position = new Vector3(xgreen, 0.0f, zgreen);
-        greentable.transform.LookAt(worldAnchor.transform.position);
+        greentable.transform.position = new Vector3(xgreen, -2.0f, zgreen);
+        Vector3 pos = new Vector3(worldAnchor.transform.position.x, -2.0f, worldAnchor.transform.position.z);
+        greentable.transform.LookAt(pos);
 
 
         xblue = xorigin + Mathf.Sin(next_angle_blue * Mathf.Deg2Rad) * radius;
         zblue = zorigin + Mathf.Cos(next_angle_blue * Mathf.Deg2Rad) * radius;
-        bluetable.transform.position = new Vector3(xblue, 0.0f, zblue);
-        bluetable.transform.LookAt(worldAnchor.transform.position);
+        bluetable.transform.position = new Vector3(xblue, -2.0f, zblue);
+        bluetable.transform.LookAt(pos);
 
 
 
@@ -291,8 +292,9 @@ public class bookRecord : MonoBehaviour
 
             
 
-            greentable.transform.position = new Vector3(xgreen, 0.0f, zgreen);
-            greentable.transform.LookAt(worldAnchor.transform.position);
+            greentable.transform.position = new Vector3(xgreen, -2.0f, zgreen);
+            Vector3 pos = new Vector3(worldAnchor.transform.position.x, -2.0f, worldAnchor.transform.position.z);
+            greentable.transform.LookAt(pos);
 
            
 
@@ -321,8 +323,9 @@ public class bookRecord : MonoBehaviour
 
            
 
-            bluetable.transform.position = new Vector3(xblue, 0.0f, zblue);
-            bluetable.transform.LookAt(worldAnchor.transform.position);
+            bluetable.transform.position = new Vector3(xblue, -2.0f, zblue);
+            
+            bluetable.transform.LookAt(pos);
            
 
 

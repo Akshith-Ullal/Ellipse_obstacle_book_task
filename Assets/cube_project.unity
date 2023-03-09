@@ -1651,7 +1651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 08d5439121a07f544bdaaa816bb04c47, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 08d5439121a07f544bdaaa816bb04c47, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2186,7 +2186,7 @@ MonoBehaviour:
   bluetrialdone: 0
   greentrialdone: 0
   distancelimit: 0
-  radius: 15
+  radius: 5
   xorigin: 0
   zorigin: 0
   xgreen: 0
@@ -2245,7 +2245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 08d5439121a07f544bdaaa816bb04c47, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 08d5439121a07f544bdaaa816bb04c47, type: 3}
       propertyPath: m_LocalPosition.z
