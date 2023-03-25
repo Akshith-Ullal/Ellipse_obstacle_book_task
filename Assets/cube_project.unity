@@ -2138,7 +2138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeScale: 1
-  trajectoryFilePath: C:\Users\liuj58\Downloads\PositionRecording_book_0001a (3)_1
+  trajectoryFilePath: C:\Users\ullala\Desktop\ellipse_test_paths\book_task_paths\p0\paths\p_0_PositionRecording_blue_book_trial_num_1_table_angle_0_radius_51.json
   targetEndPoint: {fileID: 0}
   loop: 1
 --- !u!114 &1069668785
@@ -2196,18 +2196,7 @@ MonoBehaviour:
   next_angle: 180
   next_angle_blue: 0
   green_angle_flag: 0
-  bluebookinitrelpos: {x: 0, y: 0, z: 0}
-  greenbookinitrelpos: {x: 0, y: 0, z: 0}
-  blueboxinitrelpos: {x: 0, y: 0, z: 0}
-  greenboxinitrelpos: {x: 0, y: 0, z: 0}
-  startgreenpos: {x: 0, y: 0, z: 0}
-  endgreenpos: {x: 0, y: 0, z: 0}
-  startbluepos: {x: 0, y: 0, z: 0}
-  endbluepos: {x: 0, y: 0, z: 0}
-  bluebookinitrelrot: {x: 0, y: 0, z: 0, w: 0}
-  greenbookinitrelrot: {x: 0, y: 0, z: 0, w: 0}
-  blueboxinitrelrot: {x: 0, y: 0, z: 0, w: 0}
-  greenboxinitrelrot: {x: 0, y: 0, z: 0, w: 0}
+  id: 2
 --- !u!1001 &1071126762
 PrefabInstance:
   m_ObjectHideFlags: 0

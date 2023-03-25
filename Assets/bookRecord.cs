@@ -68,19 +68,20 @@ public class bookRecord : MonoBehaviour
     public float next_angle_blue = 0.0f;
     public bool green_angle_flag = false;
     System.Random rnd = new System.Random();
-    public Vector3 bluebookinitrelpos; // used to store the initial relative position of the blue book to the table
-    public Vector3 greenbookinitrelpos; // used to store the initial relative position of the green book to the table
-    public Vector3 blueboxinitrelpos; // used to store the initial relative position of the blue box to the table
-    public Vector3 greenboxinitrelpos; // used to store the initial relative position of the green box to the table
-    public Vector3 startgreenpos;
-    public Vector3 endgreenpos;
-    public Vector3 startbluepos;
-    public Vector3 endbluepos;
-    public Quaternion bluebookinitrelrot; // used to store the initial relative rotation of the blue book to the table
-    public Quaternion greenbookinitrelrot; // used to store the initial relative rotation of the green book to the table
-    public Quaternion blueboxinitrelrot; // used to store the initial relative rotation of the blue box to the table
-    public Quaternion greenboxinitrelrot; // used to store the initial relative rotation of the green box to the table
+    private Vector3 bluebookinitrelpos; // used to store the initial relative position of the blue book to the table
+    private Vector3 greenbookinitrelpos; // used to store the initial relative position of the green book to the table
+    private Vector3 blueboxinitrelpos; // used to store the initial relative position of the blue box to the table
+    private Vector3 greenboxinitrelpos; // used to store the initial relative position of the green box to the table
+    private Vector3 startgreenpos;
+    private Vector3 endgreenpos;
+    private Vector3 startbluepos;
+    private Vector3 endbluepos;
+    private Quaternion bluebookinitrelrot; // used to store the initial relative rotation of the blue book to the table
+    private Quaternion greenbookinitrelrot; // used to store the initial relative rotation of the green book to the table
+    private Quaternion blueboxinitrelrot; // used to store the initial relative rotation of the blue box to the table
+    private Quaternion greenboxinitrelrot; // used to store the initial relative rotation of the green box to the table
 
+    public int id;
 
 
 
@@ -409,28 +410,37 @@ public class bookRecord : MonoBehaviour
         string filename = "";
         //save to file
         if (isRecordinggreen) {
-             filename = "PositionRecording_green_book_trial_num_"+(trialnum+1).ToString() +"_table_angle_"+next_angle.ToString()  + "_radius_"+radius;
+             filename = "p_" + id + "_PositionRecording_green_book_trial_num_"+(trialnum+1).ToString() +"_table_angle_"+next_angle.ToString()  + "_radius_"+radius;
             Debug.Log("Green book position recorded");
         }
         if (isRecordingblue)
         {
-             filename = "PositionRecording_blue_book_trial_num_" + (trialnum + 1).ToString()+"_table_angle_" + next_angle_blue.ToString() + "_radius_" + radius;
+             filename = "p_" + id + "_PositionRecording_blue_book_trial_num_" + (trialnum + 1).ToString()+"_table_angle_" + next_angle_blue.ToString() + "_radius_" + radius;
             Debug.Log("Blue book position recorded");
         }
         //string path = Application.persistentDataPath + "/pathOfDevice";
-        string path = @"C:\Users\ullala\Documents\GitHub\Ellipse_obstacle_book_task\Assets\savedData";
+        string path = @"C:\Users\ullala\Desktop\ellipse_test_paths\book_task_paths";
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        string participant_path = @"C:\Users\ullala\Desktop\ellipse_test_paths\book_task_paths\" + "p_" + id + "/" + "path";
+        if (!Directory.Exists(participant_path))
+        {
+            Directory.CreateDirectory(participant_path);
+        }
 
-        Directory.CreateDirectory(path);
+        
 
         int inc = 1;
 
-        while (File.Exists(path + "/" + filename + inc.ToString() + ".json"))
+        while (File.Exists(participant_path + "/" + filename + inc.ToString() + ".json"))
         {
             inc++;
             Debug.Log("exists");
         }
 
-        string filepath = path + "/" + filename + inc.ToString() + ".json";
+        string filepath = participant_path + "/" + filename + inc.ToString() + ".json";
 
         File.WriteAllText(filepath, JsonConvert.SerializeObject(entries, Formatting.None,
             new JsonSerializerSettings()
